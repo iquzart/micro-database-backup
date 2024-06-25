@@ -11,7 +11,7 @@ const (
 	DefaultMongoUsername = "admin"
 	DefaultMongoPassword = "password"
 	DefaultBackupDir     = "/tmp/micro-database-backup/mongodb"
-	DefaultDatabaseName  = "mydb"
+	DefaultDatabaseName  = "admin"
 )
 
 var (

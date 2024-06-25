@@ -1,0 +1,2 @@
+# Ignore test envrionment database data
+test_environments/data

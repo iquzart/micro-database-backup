@@ -1,0 +1,23 @@
+#
+#
+# Docker Compose MongoDB
+#
+#
+services:
+  mongodb:
+    image: mongo:${MONGODB_VERSION}
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+    volumes:
+      - ./data/mongodb:/data/db
+    networks:
+      - db-net-prod
+    ports:
+      - 27017:27017
+
+networks:
+  db-net-prod:
+    external: false

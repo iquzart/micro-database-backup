@@ -29,14 +29,15 @@ func (db *MongoDB) CreateBackupDirectory(backupPath string) error {
 }
 
 func (db *MongoDB) BackupDatabase(databaseName, backupPath string) error {
-	backupDir := filepath.Join(backupPath, databaseName)
+	backupFilename := filepath.Join(backupPath, databaseName+".gz")
 	cmd := exec.Command("mongodump",
 		"--host", db.Host,
 		"--port", fmt.Sprint(db.Port),
 		"--username", db.Username,
 		"--password", db.Password,
 		"--db", databaseName,
-		"--out", backupDir)
+		"--archive="+backupFilename,
+		"--gzip")
 
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

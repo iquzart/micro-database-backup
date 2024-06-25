@@ -46,13 +46,18 @@ docker-build: ## Build the Docker image
 
 docker-run: docker-build ## Run the Docker container
 	docker run --name $(DOCKER_CONTAINER) -d \
-	  -e MONGODB_HOST="localhost" \
+	  -e MONGODB_HOST="mongodb" \
 	  -e MONGODB_PORT="27017" \
 	  -e MONGODB_USERNAME="admin" \
 	  -e MONGODB_PASSWORD="password" \
 	  -e BACKUP_DIR="/tmp/micro-database-backup/mongodb" \
 	  -e DATABASE_NAME="mydb" \
 	  $(DOCKER_IMAGE)
+
+
+mongodb-env-setup: # setup mongodb
+	docker-compose -f test_environments/docker-compose.yaml.mongo up -d
+
 
 cleanup: ## Cleanup Docker resources
 	docker rm -f $(DOCKER_CONTAINER) 2>/dev/null || true
